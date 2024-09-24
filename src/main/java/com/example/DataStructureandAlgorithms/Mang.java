@@ -1,4 +1,6 @@
 package com.example.DataStructureandAlgorithms;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 public class Mang {
 
@@ -6,7 +8,7 @@ public class Mang {
         int n =array.length;
         for(int i = 0;i<n-1;i++){
             for(int j=0;j<n-i-1;j++){
-                if(ascending){
+                /*if(ascending){
                     //Sắp xếp tăng dần
                     if(array[j] > array[j+1]){
                             int temp = array[j];
@@ -21,13 +23,18 @@ public class Mang {
                         array[j]=array[j+1];
                         array[j+1]=temp;
                     }
+                }*/
+                if ((ascending && array[j] > array[j + 1]) || (!ascending && array[j] < array[j + 1])) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
                 }
             }
         }
     }
 
     public static void findNumber(int[] array,boolean max){
-        int n = array.length;
+        /*int n = array.length;
         int Max = array[0];
         int Min = array[0];
         for(int i =1 ; i< n;i++){
@@ -38,32 +45,41 @@ public class Mang {
                 Min=array[i];
             }
         }
-        if(max ==true){
+        if(max == true){
             System.out.println("Max : "+Max);
         }
         else {
             System.out.println("Min : "+Min);
+        }*/
+
+        int result = array[0];
+        for (int value : array) {
+            if ((max && value > result) || (!max && value < result)) {
+                result = value;
+            }
         }
+        System.out.println((max ? "Max" : "Min") + " : " + result);
     }
 
     public static void ViewArray(int[] array){
         //Hiển thị mảng sau khi sắp xếp
-        for(int i = 0;i<array.length;i++){
+        /*for(int i = 0;i<array.length;i++){
             System.out.println(array[i]+ " ");
         }
-        System.out.println();
+        System.out.println();*/
+
+        System.out.println(Arrays.toString(array));
     }
 
     public static void SearchNum(int[] array, int x){
-        int temp = 0;
         int vitri= 0;
         for(int i =0;i<array.length-1;i++){
             if(x == array[i]){
-                temp = array[i];
                 vitri=i+1;
+                break;
             }
         }
-        System.out.println("Số cần tìm là : "+ temp +" tại vị trí "+ vitri);
+        System.out.println("Số cần tìm là : "+ x +" tại vị trí "+ vitri);
     }
 
     public static void MangNangCao(){
@@ -155,22 +171,28 @@ public class Mang {
         }
 
         //Hiển thị các giá trị của mảng
-        System.out.println("Các giá trị của mảng lần lượt là : ");
+        /*System.out.println("Các giá trị của mảng lần lượt là : ");
         for(int i = 0;i<size;i++){
             System.out.println("Phần tử thứ " + (i+1) + " là " + array[i]);
-        }
+        }*/
+
+        System.out.println("Các giá trị của mảng: " + Arrays.toString(array));
 
         //Nhập vào yêu cầu
-        System.out.println("1.Sắp xếp lại mảng giảm dần");
+       /* System.out.println("1.Sắp xếp lại mảng giảm dần");
         System.out.println("2.Sắp xếp lại mảng tăng dần");
         System.out.println("3.Tìm ra số lớn nhất trong mảng");
         System.out.println("4.Tìm ra số nhỏ nhất trong mảng");
         System.out.println("5.Tìm số");
         System.out.println("6. Mảng nâng cao");
-        System.out.print("Nhập vào yêu cầu : ");
-        int a = scanner.nextInt();
+        System.out.print("Nhập vào yêu cầu : ");*/
 
-        switch (a){
+        // Chọn chức năng
+        System.out.println("1. Sắp xếp giảm dần\n2. Sắp xếp tăng dần\n3. Tìm số lớn nhất\n4. Tìm số nhỏ nhất\n5. Tìm số\n6. Mảng nâng cao");
+        System.out.print("Nhập vào yêu cầu: ");
+        int choice = scanner.nextInt();
+
+        switch (choice){
             case 1:
                 bubbleSort(array,false);
                 System.out.println("Mảng sau khi sắp xếp giảm dần");
@@ -196,7 +218,7 @@ public class Mang {
                 MangNangCao();
                 break;
             default:
-                System.out.println("Nhập sai giá trị !");
+                System.out.println("Lựa chọn không hợp lệ");
             return;
         }
 
